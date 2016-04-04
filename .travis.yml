@@ -8,7 +8,7 @@ android:
     - extra 
     - platform-tools 
     - tools
-    - extra-google-googleplayservices
+    - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-19
@@ -24,5 +24,6 @@ notifications:
   email:
     recipients:
     - public@dpal.hu
-    onsuccess: always
-    onfailure: always
+    on_success: always
+    on_failure: always
+script: ./gradlew :app:build :app:connectedDebugAndroidTest
