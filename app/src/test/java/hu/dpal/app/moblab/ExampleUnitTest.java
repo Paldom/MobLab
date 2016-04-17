@@ -1,4 +1,4 @@
-package moblab.dpal.hu.moblab;
+package hu.dpal.app.moblab;
 
 import org.junit.Test;
 
