@@ -26,7 +26,7 @@ notifications:
     - public@dpal.hu
     on_success: always
     on_failure: always
-script: ./gradlew :app:build :app:connectedDebugAndroidTest
+script: ./gradlew :app:build
 env:
    global:
         - MALLOC_ARENA_MAX=2
