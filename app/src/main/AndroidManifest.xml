@@ -33,7 +33,7 @@
             android:value="@string/fabric_api_key" />
 
         <activity android:name=".ui.partners.PartnersActivity" />
-        <activity android:name=".ui.reservation.Reservation" />
+        <activity android:name=".ui.reservation.ReservationActivity" />
         <activity android:name=".ui.details.DetailsActivity"></activity>
     </application>
 
