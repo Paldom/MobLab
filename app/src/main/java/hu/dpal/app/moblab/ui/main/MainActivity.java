@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements IMainScreen {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // MobLabApplication.injector.inject(this);
+        MobLabApplication.injector.inject(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity implements IMainScreen {
 
         btnPartners.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //mainPresenter.showPartners();
+                mainPresenter.showPartners();
             }
         });
 
         btnReservation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //mainPresenter.showReservation("TODO");
+                mainPresenter.showReservation("TODO");
             }
         });
 
@@ -81,6 +81,18 @@ public class MainActivity extends AppCompatActivity implements IMainScreen {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mainPresenter.attachScreen(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mainPresenter.detachScreen();
     }
 
 
