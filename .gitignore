@@ -6,3 +6,6 @@
 .DS_Store
 /build
 /captures
+
+/fabric.properties
+/app/src/main/res/values/api_keys.xml
