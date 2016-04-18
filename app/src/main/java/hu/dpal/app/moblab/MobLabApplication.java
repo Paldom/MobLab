@@ -3,6 +3,7 @@ package hu.dpal.app.moblab;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+import com.orm.SugarContext;
 
 import hu.dpal.app.moblab.ui.UIModule;
 import io.fabric.sdk.android.Fabric;
@@ -18,6 +19,9 @@ public class MobLabApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        SugarContext.init(this);
+        Fabric.with(this, new Crashlytics());
+
         if (BuildConfig.TYPE.equals("MOCK")) {
             injector = DaggerIMockNetworkMobLabApplicationComponent.builder().uIModule(
                     new UIModule(this)
@@ -28,7 +32,7 @@ public class MobLabApplication extends Application {
             ).build();
         }
 
-        Fabric.with(this, new Crashlytics());
+
     }
 
 

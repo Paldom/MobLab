@@ -16,13 +16,15 @@ public class MockPartnerApi implements IPartnerApi {
 
     @Override
     public Observable<List<Partner>> getPartners(@Query("query") String query, @Query("skip") int skip, @Query("limit") int limit) {
+        final List<Partner> partners = Partner.listAll(Partner.class);
         return Observable.create(new Observable.OnSubscribe<List<Partner>>() {
             @Override
             public void call(Subscriber<? super List<Partner>> observer) {
                 try {
-                    List<Partner> partners = Partner.listAll(Partner.class);
-                    observer.onNext(partners);
-                    observer.onCompleted();
+                    if (!observer.isUnsubscribed()) {
+                        observer.onNext(partners);
+                        observer.onCompleted();
+                    }
                 } catch (Exception e) {
                     observer.onError(e);
                 }
@@ -32,14 +34,15 @@ public class MockPartnerApi implements IPartnerApi {
 
     @Override
     public Observable<Partner> getPartner(@Path("id") Long id) {
-        final Long fId = id;
+        final Partner partner = Partner.findById(Partner.class, id);
         return Observable.create(new Observable.OnSubscribe<Partner>() {
             @Override
             public void call(Subscriber<? super Partner> observer) {
                 try {
-                    Partner partner = Partner.findById(Partner.class, fId);
-                    observer.onNext(partner);
-                    observer.onCompleted();
+                    if (!observer.isUnsubscribed()) {
+                        observer.onNext(partner);
+                        observer.onCompleted();
+                    }
                 } catch (Exception e) {
                     observer.onError(e);
                 }

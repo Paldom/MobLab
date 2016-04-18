@@ -1,5 +1,6 @@
 package hu.dpal.app.moblab.network.mock;
 
+import javax.annotation.Nullable;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -45,19 +46,13 @@ public class MockNetworkModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit() {
-        return null;
-    }
-
-    @Provides
-    @Singleton
-    public IPartnerApi provideArtistsApi(Retrofit retrofit) {
+    public IPartnerApi provideArtistsApi() {
         return new MockPartnerApi();
     }
 
     @Provides
     @Singleton
-    public IReservationApi provideReservationApi(Retrofit retrofit) {
+    public IReservationApi provideReservationApi() {
         return new MockReservationApi();
     }
 
