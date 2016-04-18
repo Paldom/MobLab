@@ -18,9 +18,15 @@ public class MobLabApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        injector = DaggerIMobLabApplicationComponent.builder().uIModule(
-                new UIModule(this)
-        ).build();
+        if (BuildConfig.TYPE.equals("MOCK")) {
+            injector = DaggerIMockNetworkMobLabApplicationComponent.builder().uIModule(
+                    new UIModule(this)
+            ).build();
+        } else {
+            injector = DaggerIMobLabApplicationComponent.builder().uIModule(
+                    new UIModule(this)
+            ).build();
+        }
 
         Fabric.with(this, new Crashlytics());
     }

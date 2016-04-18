@@ -1,20 +1,29 @@
 package hu.dpal.app.moblab.model;
 
+import com.orm.SugarRecord;
+
 /**
  * Created by dpal on 17/04/16.
  */
-public class User {
+public class User extends SugarRecord {
 
-    private int id;
+    private Long id;
     private String email;
     private String name;
 
+    public User() {
+    }
 
-    public int getId() {
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

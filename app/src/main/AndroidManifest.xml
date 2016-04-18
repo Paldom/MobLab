@@ -31,11 +31,16 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="@string/fabric_api_key" />
+            android:value="52dfbe8748900428bea61910f14cc2a1b9936408" />
 
         <activity android:name=".ui.partners.PartnersActivity" />
         <activity android:name=".ui.reservation.ReservationActivity" />
         <activity android:name=".ui.details.DetailsActivity"></activity>
+
+        <meta-data android:name="DATABASE" android:value="sugar_example.db" />
+        <meta-data android:name="VERSION" android:value="2" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="hu.dpal" />
     </application>
 
 </manifest>
