@@ -1,11 +1,17 @@
 package hu.dpal.app.moblab.model;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Table;
+
+import java.util.Date;
+
 /**
  * Created by dpal on 17/04/16.
  */
-public class Partner {
+@Table
+public class Partner extends SugarRecord {
 
-    private int id;
+    private Long id;
     private String createdAt;
     private String updatedAt;
     private String img;
@@ -16,11 +22,33 @@ public class Partner {
     private String phone;
     private String[] coordinates;
 
-    public int getId() {
+    public Partner() {
+    }
+
+    public Partner(String img,
+                   String title,
+                   String desc,
+                   String address,
+                   String website,
+                   String phone,
+                   String[] coordinates) {
+        this.img = img;
+        this.title = title;
+        this.desc = desc;
+        this.address = address;
+        this.website = website;
+        this.phone = phone;
+        this.coordinates = coordinates;
+
+        this.createdAt = new Date().toString();
+        this.updatedAt = new Date().toString();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

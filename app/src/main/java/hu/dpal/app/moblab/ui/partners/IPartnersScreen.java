@@ -8,7 +8,7 @@ import hu.dpal.app.moblab.model.Partner;
  * Created by dpal on 17/04/16.
  */
 public interface IPartnersScreen {
-    void showPartners(List<Partner> artists);
+    void showPartners(List<Partner> partners);
     void showNetworkError(String errorMsg);
-    void showPartnerDetailsScreen(String partnerId);
+    void showPartnerDetailsScreen(Long partnerId);
 }

@@ -1,21 +1,48 @@
 package hu.dpal.app.moblab.model;
 
+import com.orm.SugarRecord;
+import com.orm.dsl.Table;
+
 /**
  * Created by dpal on 17/04/16.
  */
-public class Reservation {
+@Table
+public class Reservation extends SugarRecord {
 
-    private int id;
+    private Long id;
+    private Long partnerId;
     private String reservationCode;
     private String reservationDate;
     private String category;
 
-    public int getId() {
+    public Reservation() {
+    }
+
+    public Reservation(Long partnerId,
+                       String reservationCode,
+                       String reservationDate,
+                       String category) {
+        this.partnerId = partnerId;
+        this.reservationCode = reservationCode;
+        this.reservationDate = reservationDate;
+        this.category = category;
+    }
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getPartnerId() {
+        return partnerId;
+    }
+
+    public void setPartnerId(Long partnerId) {
+        this.partnerId = partnerId;
     }
 
     public String getReservationCode() {
