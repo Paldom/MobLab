@@ -30,12 +30,27 @@ public class PartnersPresenter extends Presenter<IPartnersScreen> {
         partnerApi.getPartners("",0,1)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Partner>>() {
+                .subscribe(new Subscriber<List<Partner>>() {
+                    @Override
+                    public void onNext(List<Partner> partners) {
+                        showPartnersOnScreen(partners);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        showErrorMsgOnScreen(e.getMessage());
+                    }
+                });
+                /*.subscribe(new Action1<List<Partner>>() {
                     @Override
                     public void call(List<Partner> partners) {
                         showPartners(partners);
                     }
-                });
+                });*/
     }
 
     @Override
@@ -43,9 +58,17 @@ public class PartnersPresenter extends Presenter<IPartnersScreen> {
         super.detachScreen();
     }
 
-    private void showPartners(List<Partner> partners) {
+    // private
+
+    private void showPartnersOnScreen(List<Partner> partners) {
         screen.showPartners(partners);
     }
+
+    private void showErrorMsgOnScreen(String e) {
+        screen.showNetworkError(e);
+    }
+
+    // public
 
     public void searchPartner(String query) {
         // TODO

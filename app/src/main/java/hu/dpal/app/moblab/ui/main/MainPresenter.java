@@ -21,8 +21,8 @@ public class MainPresenter extends Presenter<IMainScreen> {
         screen.showPartnersScreen();
     }
 
-    public void showReservation(String reservationCode) {
-        screen.showReservationScreen(reservationCode);
+    public void showReservation(Long reservationId) {
+        screen.showReservationScreen(reservationId);
     }
 
 }

@@ -1,12 +1,14 @@
 package hu.dpal.app.moblab.ui.partners;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +19,16 @@ import android.widget.Toast;
 import hu.dpal.app.moblab.MobLabApplication;
 import hu.dpal.app.moblab.R;
 import hu.dpal.app.moblab.model.Partner;
-import hu.dpal.app.moblab.ui.details.DetailsActivity;
+import hu.dpal.app.moblab.ui.FragmentHolderActivity;
+import hu.dpal.app.moblab.ui.IFragmentBackPressed;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class PartnersFragment extends Fragment implements IPartnersScreen {
+public class PartnersFragment extends Fragment implements IPartnersScreen, IFragmentBackPressed {
 
     private EditText etSearch;
     private TextView tvEmpty;
@@ -56,9 +60,9 @@ public class PartnersFragment extends Fragment implements IPartnersScreen {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_partners_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_partners, container, false);
 
-        etSearch = (EditText) view.findViewById(R.id.etArtist);
+        etSearch = (EditText) view.findViewById(R.id.etSearch);
         tvEmpty = (TextView) view.findViewById(R.id.tvEmpty);
 
         rvPartners = (RecyclerView) view.findViewById(R.id.recyclerViewPartners);
@@ -121,6 +125,17 @@ public class PartnersFragment extends Fragment implements IPartnersScreen {
 
     @Override
     public void showPartnerDetailsScreen(Long partnerId) {
-        startActivity(new Intent(getActivity(), DetailsActivity.class));
+        // TODO: http://stackoverflow.com/questions/26561579/how-to-start-shared-element-transition-using-fragments
+        // TODO: MVP fragment & activity
+        ((FragmentHolderActivity)getActivity()).pushFragment(
+                DetailsFragment.newInstance(partnerId),
+                DetailsFragment.TAG,
+                true);
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Log.d("FRAGMENT_MSG", "bye");
+        return false;
     }
 }

@@ -18,13 +18,13 @@ public interface IReservationApi {
     Observable<Reservation> createReservation(@Body Reservation reservation);
 
     @GET("reservation/{reservationCode}")
-    Observable<Reservation> getReservation(@Path("reservationCode") String reservationCode);
+    Observable<Reservation> getReservation(@Path("reservationId") Long reservationId);
 
     @PUT("reservation/{reservationCode}")
-    Observable<Reservation> updateReservation(@Path("reservationCode") String reservationCode,
+    Observable<Reservation> updateReservation(@Path("reservationId") Long reservationId,
                                         @Body Reservation reservation);
 
     @DELETE("reservation/{reservationCode}")
-    Observable<Reservation> deleteReservation(@Path("reservationCode") String reservationCode);
+    Observable<Long> deleteReservation(@Path("reservationId") Long reservationId);
 
 }

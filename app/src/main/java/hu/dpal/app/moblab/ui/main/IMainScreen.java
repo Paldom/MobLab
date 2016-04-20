@@ -5,5 +5,5 @@ package hu.dpal.app.moblab.ui.main;
  */
 public interface IMainScreen {
     void showPartnersScreen();
-    void showReservationScreen(String reservationCode);
+    void showReservationScreen(Long reservationId);
 }

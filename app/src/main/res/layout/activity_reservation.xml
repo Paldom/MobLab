@@ -9,4 +9,73 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hu.dpal.app.moblab.ui.reservation.ReservationActivity">
 
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_margin="4dp"
+            android:text="Partner"/>
+
+        <include layout="@layout/card_partner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_margin="4dp"
+            android:text="Details"/>
+
+        <EditText
+            android:id="@+id/etDate"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:enabled="false"
+            android:hint="Date" />
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:enabled="false"
+            android:hint="Category"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1.0">
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_width="0dip"
+            android:textSize="12sp"
+            android:text="Delete"/>
+        <Button
+            android:id="@+id/btnModify"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_width="0dip"
+            android:textSize="12sp"
+            android:text="Modify"/>
+    </LinearLayout>
+
 </RelativeLayout>

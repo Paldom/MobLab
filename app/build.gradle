@@ -100,7 +100,7 @@ dependencies {
 
     // ORM: Sugar ORM
     compile 'com.github.satyan:sugar:1.4'
-    
+
     // FRP libraries and extensions
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.

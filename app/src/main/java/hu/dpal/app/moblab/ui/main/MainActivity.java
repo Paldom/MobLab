@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import javax.inject.Inject;
 
@@ -17,8 +18,11 @@ import hu.dpal.app.moblab.MobLabApplication;
 import hu.dpal.app.moblab.R;
 import hu.dpal.app.moblab.ui.partners.PartnersActivity;
 import hu.dpal.app.moblab.ui.reservation.ReservationActivity;
+import hu.dpal.app.moblab.util.Constants;
 
 public class MainActivity extends AppCompatActivity implements IMainScreen {
+
+    EditText etId;
 
     @Inject
     MainPresenter mainPresenter;
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements IMainScreen {
             });
         }
 
+        etId = (EditText) findViewById(R.id.etId);
+
         Button btnPartners = (Button) findViewById(R.id.btnPartners);
         Button btnReservation = (Button) findViewById(R.id.btnReservation);
 
@@ -55,7 +61,14 @@ public class MainActivity extends AppCompatActivity implements IMainScreen {
 
         btnReservation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mainPresenter.showReservation("TODO");
+                String idString = etId.getText().toString();
+                if (idString == null) return;
+                try {
+                    Long id = Long.parseLong(idString);
+                    mainPresenter.showReservation(id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -103,9 +116,9 @@ public class MainActivity extends AppCompatActivity implements IMainScreen {
     }
 
     @Override
-    public void showReservationScreen(String reservationCode) {
+    public void showReservationScreen(Long reservationId) {
         Intent intent = new Intent(MainActivity.this, ReservationActivity.class);
-        intent.putExtra("RESERVATION_CODE", reservationCode);
+        intent.putExtra(Constants.KEY_RESERVATION_ID, reservationId);
         startActivity(intent);
     }
 }
