@@ -1,0 +1,328 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: MobLab API
+# during dev, should point to your local machine
+host: localhost:10010
+
+basePath: /api/v1
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+paths:
+            
+  /partner:
+    x-swagger-router-controller: Partner
+    get:
+      description: Get partners list with filtering and pagination
+      
+      operationId: getPartners
+      
+      parameters:
+      - name: query
+        in: query
+        description: search expression
+        type: string
+      - name: skip
+        in: query
+        description: pages to skip
+        type: number
+      - name: limit
+        in: query
+        description: pagination (10 items / page)
+        type: number
+      - name: lat
+        in: query
+        description: latitude coordinate
+        type: string
+      - name: long
+        in: query
+        description: longitude coordinate
+        type: string
+                
+      responses:
+        "200":
+          description: Partner objects
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Partner"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+        
+  /partner/{partner_id}:
+    x-swagger-router-controller: Partner
+    get:
+      description: Get one partner
+    
+      operationId: getPartner
+    
+      parameters:
+      - name: partner_id
+        in: path 
+        type: string
+        required: true
+      
+      responses:
+        "200":
+          description: Partner object
+          schema:
+            $ref: "#/definitions/PartnerDetails"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+        
+  /reservation:
+    x-swagger-router-controller: Reservation
+    get:
+      description: Get my reservations
+      
+      operationId: getReservations
+      
+      parameters:
+      - name: page
+        in: query
+        description: pagination (10 item / page)
+        type: number
+      - name: partner_id
+        in: query
+        description: related partner's id
+        type: string
+        required: true
+                
+      responses:
+        "200":
+          description: Reservation objects
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Reservation"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+    post:
+      description: Create reservation
+      
+      operationId: createReservation
+      
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Reservation'
+    
+      responses:
+        "201":
+          description: Created reservation object
+          schema:
+            $ref: "#/definitions/Reservation"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    
+        
+  /reservation/{reservation_id}:
+    x-swagger-router-controller: Reservation
+    get:
+      description: Get one reservation
+      
+      operationId: getReservation
+    
+      parameters:
+      - name: reservation_id
+        in: path 
+        type: string
+        required: true
+      
+      responses:
+        "200":
+          description: Reservation object
+          schema:
+            $ref: "#/definitions/Reservation"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+      
+    put:
+      description: Change reservation details
+      
+      operationId: updateReservation
+      
+      parameters:
+      - name: reservation_id
+        in: path 
+        type: string
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Reservation'
+    
+      responses:
+        "200":
+          description: Reservation object
+          schema:
+            $ref: '#/definitions/Reservation'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    
+        
+    delete:
+      description: Remove reservation
+      
+      operationId: deleteReservation
+      
+      parameters:
+      - name: reservation_id
+        in: path 
+        type: string
+        required: true
+    
+      responses:
+        "204":
+          description: Removed
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+        
+        
+  
+  # DO NOT REMOVE, REQUIRED FOR SWAGGER       
+    
+  /swagger:
+    x-swagger-pipe: swagger_raw
+    
+
+definitions:
+        
+  Partner:
+    properties:
+      id:
+        type: string
+      img: 
+        type: string
+      title:
+        type: string
+        minLength: 3
+        maxLength: 15
+      desc: 
+        type: string
+        maxLength: 500
+      coordinates:
+        type: array
+        items: 
+          type: string
+
+
+  PartnerDetails:
+    allOf:
+    - $ref: '#/definitions/Partner'
+    - type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        address: 
+          type: string
+        website:
+          type: string
+        phone:
+          type: string
+        categories:
+          type: array
+          items: 
+            type: string
+            
+        
+
+  Reservation:
+    properties:
+      id:
+        type: string
+      partnerId:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      reservationCode:
+        type: string
+      reservationDate:
+        type: string
+        format: date-time
+      category:
+        type: string
+        
+        
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: object
+  
+      
