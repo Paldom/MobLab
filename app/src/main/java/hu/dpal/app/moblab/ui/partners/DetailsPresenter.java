@@ -3,6 +3,8 @@ package hu.dpal.app.moblab.ui.partners;
 import javax.inject.Inject;
 
 import hu.dpal.app.moblab.MobLabApplication;
+import hu.dpal.app.moblab.interactor.PartnerInteractor;
+import hu.dpal.app.moblab.interactor.ReservationInteractor;
 import hu.dpal.app.moblab.model.Partner;
 import hu.dpal.app.moblab.model.Reservation;
 import hu.dpal.app.moblab.network.IPartnerApi;
@@ -18,10 +20,10 @@ import rx.schedulers.Schedulers;
 public class DetailsPresenter extends Presenter<IDetailsScreen> {
 
     @Inject
-    IPartnerApi partnerApi;
+    PartnerInteractor partnerInteractor;
 
     @Inject
-    IReservationApi reservationApi;
+    ReservationInteractor reservationInteractor;
 
 
     @Override
@@ -52,7 +54,7 @@ public class DetailsPresenter extends Presenter<IDetailsScreen> {
     // public
 
     public void loadPartner (Long partnerId) {
-        partnerApi.getPartner(partnerId)
+        partnerInteractor.getPartner(partnerId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Partner>() {
@@ -77,7 +79,7 @@ public class DetailsPresenter extends Presenter<IDetailsScreen> {
     }
 
     public void makeReservation(Reservation reservation) {
-        reservationApi.createReservation(reservation)
+        reservationInteractor.createReservation(reservation)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Reservation>() {

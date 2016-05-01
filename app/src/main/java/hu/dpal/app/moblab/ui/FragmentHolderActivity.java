@@ -22,9 +22,9 @@ public abstract class FragmentHolderActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack) {
-            fragmentTransaction.add(getFragmentContainerId(), fragment, DetailsFragment.TAG);
+            fragmentTransaction.add(getFragmentContainerId(), fragment, tag);
         } else {
-            fragmentTransaction.replace(getFragmentContainerId(), fragment, DetailsFragment.TAG);
+            fragmentTransaction.replace(getFragmentContainerId(), fragment,  tag);
         }
         fragmentTransaction.commit();
     }

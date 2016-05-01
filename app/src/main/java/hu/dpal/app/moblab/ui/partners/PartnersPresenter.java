@@ -1,14 +1,12 @@
 package hu.dpal.app.moblab.ui.partners;
 
-import com.google.common.eventbus.EventBus;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import hu.dpal.app.moblab.MobLabApplication;
+import hu.dpal.app.moblab.interactor.PartnerInteractor;
 import hu.dpal.app.moblab.model.Partner;
-import hu.dpal.app.moblab.network.IPartnerApi;
 import hu.dpal.app.moblab.ui.Presenter;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,13 +19,13 @@ import rx.schedulers.Schedulers;
 public class PartnersPresenter extends Presenter<IPartnersScreen> {
 
     @Inject
-    IPartnerApi partnerApi;
+    PartnerInteractor partnerInteractor;
 
     @Override
     public void attachScreen(IPartnersScreen screen) {
         super.attachScreen(screen);
         MobLabApplication.injector.inject(this);
-        partnerApi.getPartners("",0,1)
+        partnerInteractor.getPartners("",0,1)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Partner>>() {

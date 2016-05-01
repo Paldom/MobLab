@@ -5,7 +5,7 @@ import android.os.Bundle;
 import hu.dpal.app.moblab.R;
 import hu.dpal.app.moblab.ui.FragmentHolderActivity;
 
-public class PartnersActivity extends FragmentHolderActivity {
+public class PartnersActivity extends FragmentHolderActivity implements IFragmentNavigator {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

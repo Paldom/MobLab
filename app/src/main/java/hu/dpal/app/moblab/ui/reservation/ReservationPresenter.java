@@ -5,6 +5,8 @@ import android.text.Editable;
 import javax.inject.Inject;
 
 import hu.dpal.app.moblab.MobLabApplication;
+import hu.dpal.app.moblab.interactor.PartnerInteractor;
+import hu.dpal.app.moblab.interactor.ReservationInteractor;
 import hu.dpal.app.moblab.model.Partner;
 import hu.dpal.app.moblab.model.Reservation;
 import hu.dpal.app.moblab.network.IPartnerApi;
@@ -22,10 +24,10 @@ public class ReservationPresenter extends Presenter<IReservationScreen> {
     private Reservation reservation;
 
     @Inject
-    IPartnerApi partnerApi;
+    PartnerInteractor partnerInteractor;
 
     @Inject
-    IReservationApi reservationApi;
+    ReservationInteractor reservationInteractor;
 
     @Override
     public void attachScreen(IReservationScreen screen) {
@@ -60,13 +62,13 @@ public class ReservationPresenter extends Presenter<IReservationScreen> {
     // public
 
     public void loadData(Long reservationId) {
-        reservationApi.getReservation(reservationId)
+        reservationInteractor.getReservation(reservationId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Reservation>() {
                     @Override
                     public void onNext(final Reservation reservation) {
-                        partnerApi.getPartner(reservation.getPartnerId())
+                        partnerInteractor.getPartner(reservation.getPartnerId())
                                 .subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Subscriber<Partner>() {
@@ -102,7 +104,7 @@ public class ReservationPresenter extends Presenter<IReservationScreen> {
     }
 
     public void deleteReservation(Long reservationId) {
-        reservationApi.deleteReservation(reservationId)
+        reservationInteractor.deleteReservation(reservationId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Long>() {
@@ -125,7 +127,7 @@ public class ReservationPresenter extends Presenter<IReservationScreen> {
     public void modifyReservation(Long reservationId, Editable date, Editable category) {
         reservation.setReservationDate(date.toString());
         reservation.setCategory(category.toString());
-        reservationApi.updateReservation(reservationId,reservation)
+        reservationInteractor.updateReservation(reservationId,reservation)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Reservation>() {

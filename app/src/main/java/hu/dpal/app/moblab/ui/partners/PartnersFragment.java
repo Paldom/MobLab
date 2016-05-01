@@ -38,6 +38,8 @@ public class PartnersFragment extends Fragment implements IPartnersScreen, IFrag
     private List<Partner> partnersList;
     private PartnersRecyclerViewAdapter partnersAdapter;
 
+    private IFragmentNavigator fragmentNavigator;
+
     @Inject
     PartnersPresenter partnerPresenter;
 
@@ -48,6 +50,13 @@ public class PartnersFragment extends Fragment implements IPartnersScreen, IFrag
     @Override
     public void onAttach(final Context context) {
         super.onAttach(context);
+
+        try {
+            fragmentNavigator = (IFragmentNavigator) context;
+        } catch (ClassCastException e) {
+            throw new RuntimeException("The activity does not implement the navigator interface");
+        }
+
         partnerPresenter.attachScreen(this);
     }
 
@@ -127,7 +136,7 @@ public class PartnersFragment extends Fragment implements IPartnersScreen, IFrag
     public void showPartnerDetailsScreen(Long partnerId) {
         // TODO: http://stackoverflow.com/questions/26561579/how-to-start-shared-element-transition-using-fragments
         // TODO: MVP fragment & activity
-        ((FragmentHolderActivity)getActivity()).pushFragment(
+        fragmentNavigator.pushFragment(
                 DetailsFragment.newInstance(partnerId),
                 DetailsFragment.TAG,
                 true);

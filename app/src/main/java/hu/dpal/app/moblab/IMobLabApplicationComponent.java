@@ -3,6 +3,9 @@ package hu.dpal.app.moblab;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import hu.dpal.app.moblab.interactor.InteractorModule;
+import hu.dpal.app.moblab.interactor.PartnerInteractor;
+import hu.dpal.app.moblab.interactor.ReservationInteractor;
 import hu.dpal.app.moblab.network.NetworkModule;
 import hu.dpal.app.moblab.ui.UIModule;
 import hu.dpal.app.moblab.ui.main.MainActivity;
@@ -18,7 +21,7 @@ import hu.dpal.app.moblab.ui.reservation.ReservationPresenter;
  */
 
 @Singleton
-@Component(modules = {UIModule.class, NetworkModule.class})
+@Component(modules = {UIModule.class, NetworkModule.class, InteractorModule.class})
 public interface IMobLabApplicationComponent {
 
     void inject(MainActivity mainActivity);
@@ -28,6 +31,9 @@ public interface IMobLabApplicationComponent {
     void inject(DetailsPresenter detailsPresenter);
     void inject(ReservationActivity reservationActivity);
     void inject(ReservationPresenter reservationPresenter);
+
+    void inject(ReservationInteractor reservationInteractor);
+    void inject(PartnerInteractor partnerInteractor);
 
 
 }
