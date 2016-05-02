@@ -18,6 +18,16 @@ public class Reservation extends SugarRecord {
     public Reservation() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        Reservation r = (Reservation) o;
+        return r.getId().equals(this.getId()) &&
+                r.getPartnerId().equals(this.getPartnerId()) &&
+                r.getReservationCode().equals(this.getReservationCode()) &&
+                r.getReservationDate().equals(this.getReservationDate()) &&
+                r.getCategory().equals(this.getCategory());
+    }
+
     public Reservation(Long partnerId,
                        String reservationCode,
                        String reservationDate,

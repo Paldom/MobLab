@@ -35,5 +35,8 @@ public class MobLabApplication extends Application {
 
     }
 
-
+    public void setInjector(IMobLabApplicationComponent appComponent) {
+        injector = appComponent;
+        injector.inject(this);
+    }
 }

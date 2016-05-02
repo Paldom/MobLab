@@ -22,6 +22,20 @@ public class Partner extends SugarRecord {
     private String phone;
     private String[] coordinates;
 
+    @Override
+    public boolean equals(Object o) {
+        Partner p = (Partner) o;
+        return p.getId().equals(this.getId()) &&
+                p.getCreatedAt().equals(this.getCreatedAt()) &&
+                p.getUpdatedAt().equals(this.getUpdatedAt()) &&
+                p.getImg().equals(this.getImg()) &&
+                p.getTitle().equals(this.getTitle()) &&
+                p.getAddress().equals(this.getAddress()) &&
+                p.getDesc().equals(this.getDesc()) &&
+                p.getWebsite().equals(this.getWebsite()) &&
+                p.getPhone().equals(this.getPhone());
+    }
+
     public Partner() {
     }
 

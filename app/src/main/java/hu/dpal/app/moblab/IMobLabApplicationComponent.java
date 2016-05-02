@@ -35,5 +35,6 @@ public interface IMobLabApplicationComponent {
     void inject(ReservationInteractor reservationInteractor);
     void inject(PartnerInteractor partnerInteractor);
 
+    void inject(MobLabApplication mobLabApplication);
 
 }

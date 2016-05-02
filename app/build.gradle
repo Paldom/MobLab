@@ -113,6 +113,12 @@ dependencies {
         transitive = true;
     }
 
+    // Robolectric
+    testCompile('org.robolectric:shadows-support-v4:3.0-rc3') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+
 }
 
 apply plugin: 'com.google.gms.google-services'
