@@ -28,9 +28,6 @@ public class TestData<T> {
         this.completed = completed;
     }
 
-    public T getPartner() {
-        return result;
-    }
 
     public Throwable getError() {
         return error;

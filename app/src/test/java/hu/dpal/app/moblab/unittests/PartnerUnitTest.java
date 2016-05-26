@@ -1,12 +1,10 @@
 package hu.dpal.app.moblab.unittests;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,11 +15,6 @@ import hu.dpal.app.moblab.TestData;
 import hu.dpal.app.moblab.TestDataSubscriber;
 import hu.dpal.app.moblab.interactor.PartnerInteractor;
 import hu.dpal.app.moblab.model.Partner;
-import rx.Observable;
-import rx.Subscriber;
-import rx.observers.TestSubscriber;
-import rx.schedulers.Schedulers;
-import rx.schedulers.TestScheduler;
 
 import static hu.dpal.app.moblab.TestHelper.setTestInjector;
 import static org.junit.Assert.*;
@@ -60,15 +53,6 @@ public class PartnerUnitTest {
     @Test
     public void mockGetTest() throws Exception {
         if (BuildConfig.FLAVOR == "mock") {
-
-            /*TestScheduler testScheduler = Schedulers.test();
-            TestSubscriber<List<Partner>> subscriber = new TestSubscriber<>();
-            Observable<List<Partner>> observable = interactor.getPartners("",0,1)
-                    .observeOn(testScheduler)
-                    .subscribeOn(testScheduler);
-            observable.subscribe(subscriber);
-
-            List<Partner> p = subscriber.getOnNextEvents().get(0);*/
 
             TestData<List<Partner>> data = new TestData<>();
             TestDataSubscriber<List<Partner>> subscriber = new TestDataSubscriber<>(data);
