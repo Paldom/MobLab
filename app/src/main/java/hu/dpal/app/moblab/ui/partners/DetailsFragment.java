@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
@@ -53,6 +54,9 @@ public class DetailsFragment extends Fragment implements IDetailsScreen {
 
     @Inject
     DetailsPresenter detailsPresenter;
+
+    private Tracker mTracker;
+    private String name = "PartnerDetails";
 
     public DetailsFragment() {
         // Required empty public constructor

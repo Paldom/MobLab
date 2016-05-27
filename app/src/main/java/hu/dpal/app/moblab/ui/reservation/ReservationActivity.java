@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.analytics.Tracker;
 
 import javax.inject.Inject;
 
@@ -40,6 +41,9 @@ public class ReservationActivity extends AppCompatActivity implements IReservati
 
     @Inject
     ReservationPresenter reservaitonPresenter;
+
+    private Tracker mTracker;
+    private String name = "Reservation";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

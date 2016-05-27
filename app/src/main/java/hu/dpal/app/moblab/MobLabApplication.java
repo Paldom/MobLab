@@ -3,6 +3,8 @@ package hu.dpal.app.moblab;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.orm.SugarContext;
 
 import hu.dpal.app.moblab.ui.UIModule;
@@ -12,6 +14,20 @@ import io.fabric.sdk.android.Fabric;
  * Created by dpal on 17/04/16.
  */
 public class MobLabApplication extends Application {
+
+    private Tracker mTracker;
+
+    /**
+     * Gets the default {@link Tracker} for this {@link Application}.
+     * @return tracker
+     */
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            mTracker = analytics.newTracker(R.xml.global_tracker);
+        }
+        return mTracker;
+    }
 
     public static IMobLabApplicationComponent injector;
 

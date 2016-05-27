@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.Tracker;
+
 import hu.dpal.app.moblab.MobLabApplication;
 import hu.dpal.app.moblab.R;
 import hu.dpal.app.moblab.model.Partner;
@@ -46,6 +48,9 @@ public class PartnersFragment extends Fragment implements IPartnersScreen, IFrag
     public PartnersFragment() {
         MobLabApplication.injector.inject(this);
     }
+
+    private Tracker mTracker;
+    private String name = "Partners";
 
     @Override
     public void onAttach(final Context context) {
